@@ -1,0 +1,400 @@
+/* CSS Document */
+/*  
+        CDental (logo): #2E88B2;
+        Dientes (logo): #84C9F9;
+        BarraMenu: #111;
+        ContenidoMenu (a): #d3e9ff;
+        Contenido(pagina): #f9fbfc;
+*/
+body{
+    background-color: #f9fbfc;
+    font-size: 22px;
+    font-family: "Times New Roman", Times, serif;
+}
+/* ---------------------- Barra Principal ---------------------- */
+#barraPrincipal{
+    position: fixed;
+    background-color: #d3e9ff;
+    width: 100%;
+    height: 85px;
+    right: 0;
+    top: 0;
+    float: left;
+    z-index: 1;
+}
+#logo{
+    width: 200px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    position:absolute;
+    left: 30px;
+}
+#iconoMenu{
+    margin-left:250px;
+    font-size: 30px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: #2E88B2;
+}
+/* ----------------------------- Menu -------------------------- */
+.menu {
+    right: 0;
+    margin-top: 84px;
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    left: 0;
+    background-color: #2090BC; 
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; 
+    visibility: visible; 
+    min-width: 20%;
+}
+.menu #iconosMenu a { /* Links del Menu */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+.menu #iconosMenu a:hover { /* Links (menu): Colocación del mouse */
+    color: #111;
+    background-color: #d3e9ff;
+}
+.menu #iconosMenu i{
+    padding-right: 10px;
+}
+.menu #iconoCerrar .closebtn { /* Boton Cerrar (menu): Posición y estilo */
+    position: absolute;
+    top: 0;
+    right: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #d3e9ff;
+}
+.menu #iconoCerrar a:hover{ /* Boton Cerrar (menu): Colocación del mouse */
+    color: red;	
+}
+#contMenu1, #contMenu2, #contMenu3, #contMenu4, #contMenu5{ /* Posicion de los iconos del menu */
+    float:right;
+}
+@media screen and (min-height: 650px) {
+    .menu {padding-top: 5px;}
+    .menu {min-width: 20%;}
+    .menu a {font-size: 8px;}
+}
+/* -------------------------- Contenido ------------------------ */
+#main { /* Contenido de la pagina */
+    position: static;
+    float: left;
+    margin-top: 90px;
+    transition: margin-left .5s;
+    background-color: #f9fbfc;
+    visibility: visible;
+    max-width:100%;
+}
+h4{
+    color: gray;
+}
+#mySidenav{
+    padding-top: 135px;	
+    visibility:visible;	
+}
+.botones{
+    width: 310px;
+    background-color: transparent;
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.botonesAbajo{
+    margin-left: 55%;
+}
+.botonRegistrar{
+    background-color: #C0D1E5;	
+    display: inline-block;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+    color: white;
+}
+.botonConsultar{
+    background-color: #5E67C5;	
+    color: white;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+}
+.botonModificar{
+    background-color: #1C136C;
+    color: white;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+}
+.botonEliminar{
+    background-color: #12213E;
+    color: white;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+}
+.formRegistro .centrarCosas{
+    text-align: center;
+
+}
+/* --------------------------------------- PACIENTES -------------------------------------- */
+.regPacientes{ /*  DIVISION DE LA REGISTRO DE LOS PACIENTES   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+ 
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.conPacientes{ /*  DIVISION DE LA CONSULTA DE LOS PACIENTES   */
+    background-color: white;
+    width: 65%;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.modPacientes{ /*  DIVISION DE LA MODIFICACION DE LOS PACIENTES   */
+    background-color: white;
+    width: 65%;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.eliPacientes{ /*  DIVISION DE LA ELIMINACION DE LOS PACIENTES  */
+    background-color: white;
+    width: 65%;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+#pagRP, #pagCP, #pagMP, #pagEP{ /*  OCULTA TODAS LAS DIVISIONES  */
+    visibility:hidden;
+    position: absolute;
+    width:100%;
+    /*    padding-left:20%;
+        padding-right:20%;*/
+}
+/* -------------------------------------- INSTRUMENTAL ------------------------------------ */
+.regInstrumental{/*  DIVISION DE LA REGISTRO DEL INSTRUMENTAL   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.conInstrumental{/*  DIVISION DE LA CONSULTA DEL INSTRUMENTAL   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.modInstrumental{/*  DIVISION DE LA MODIFICACION DEL INSTRUMENTAL   */
+    background-color: white;
+    width: 65%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.eliInstrumental{/*  DIVISION DE LA ELIMINACION DEL INSTRUMENTAL  */
+    background-color: white;
+    width: 65%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+#pagRI, #pagCI, #pagMI, #pagEI{/*  OCULTA TODAS LAS DIVISIONES  */
+    visibility:hidden;
+    position: absolute;
+    width:80%;
+    padding-left:20%;
+    padding-right:20%;
+}
+/* ------------------------------------ PROC. DENTALES ------------------------------------ */
+.regProDentales{ /*  DIVISION DE LA REGISTRO DE LOS PROC. DENTALES   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.conProDentales{/*  DIVISION DE LA CONSULTA DE LOS PROC. DENTALES   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.modProDentales{/*  DIVISION DE LA MODIFICACION DE LOS PROC. DENTALES   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+
+.eliProDentales{/*  DIVISION DE LA ELIMINACION DE LOS PROC. DENTALES  */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+#pagRPD, #pagCPD, #pagMPD, #pagEPD{/*  OCULTA TODAS LAS DIVISIONES  */
+    visibility:hidden;
+    position: absolute;
+    width:80%;
+    padding-left:20%;
+    padding-right:20%;
+}
+/* ----------------------------------------- CITAS ---------------------------------------- */
+.regCitas{ /*  DIVISION DE LA REGISTRO DE LAS CITAS   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.conCitas{ /*  DIVISION DE LA CONSULTA DE LAS CITAS   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.modCitas{ /*  DIVISION DE LA MODIFICACION DE LAS CITAS   */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+.eliCitas{ /*  DIVISION DE LA ELIMINACION DE LAS CITAS  */
+    background-color: white;
+    width: 55%;
+    height: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    -webkit-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    -moz-box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+    box-shadow: 0px 0px 8px 3px rgba(148,148,148,1);
+}
+#pagRC, #pagCC, #pagMC, #pagEC{ /*  OCULTA TODAS LAS DIVISIONES  */
+    visibility:hidden;
+    position: absolute;
+    width:80%;
+    padding-left:20%;
+    padding-right:20%;
+}

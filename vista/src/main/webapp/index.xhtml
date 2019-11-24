@@ -1,0 +1,568 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <link href="resources/estilos.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/scripts.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+    </h:head>
+    <h:body>
+        <div id="barraPrincipal">
+            <img src="resources/imagenes/logo.fw.png" id="logo" alt=""/>
+            <span  onclick="openNav()"><i id="iconoMenu" class="fas fa-bars"></i></span> 
+        </div>
+        <div id="mySidenav" class="menu">
+            <div id="iconoCerrar">
+                <a class="closebtn" onclick="closeNav()"><i class="fas fa-times-circle"></i></a>
+            </div>
+            <div onclick="openNav()" id="iconosMenu">
+                <a onclick="mostrarPagRP()"><i class="fas fa-portrait"></i> Pacientes <i id="contMenu1" class="fas fa-chevron-right"></i></a><hr/>
+                <a onclick="mostrarPagRC()"><i class="far fa-calendar-alt"></i> Citas <i id="contMenu2" class="fas fa-chevron-right"></i></a><hr/>
+                <a><i class="fas fa-search-dollar"></i> Pagos <i id="contMenu3" class="fas fa-chevron-right"></i></a><hr/>
+                <a onclick="mostrarPagRPD()"><i class="fas fa-address-card"></i> Procedimientos Dentales <i id="contMenu4" class="fas fa-chevron-right"></i></a><hr/>
+                <a onclick="mostrarPagRI()"><i class="fas fa-folder"></i> Instrumental <i id="contMenu5" class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+
+        <div id="main">
+            <!-- .................................. P A C I E N T E S ............................... -->
+            <div id="pagRP">
+                <div class="titulos">
+                    <div class="icono">
+                        <div class="botones">
+                            <input class="botonConsultar" type="button" value="Consultar" onclick="mostrarPagCP()"/>
+                            <input class="botonModificar" type="button" value="Modificar" onclick="mostrarPagMP()"/>
+                            <input class="botonEliminar" type="button" value="Eliminar" onclick="mostrarPagEP()"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="regPacientes" >
+                    <h:form class="formRegistro" id="registroPac">
+                        <p:growl id="growl" sticky="false" severity="error,info"> <p:autoUpdate/></p:growl>
+                        <br/><b><h1>Registro de Pacientes</h1></b><h4>Los datos obligatorios (*)</h4>
+                        <hr/>
+                        <br/><br/>Nombre*: <p:inputText id="nombrePaciente" placeholder=" Nombre(s)" type="text" size="13" title="Solo letras." value="#{pacienteUI.paciente.nombre}" required="true" requiredMessage="Nombre(s) faltante" > <p:keyFilter regEx="/[A-Z �����]/i"/> </p:inputText>
+                        <p:spacer width="7" /><p:inputText id="apellidoPPaciente" placeholder=" Apellido paterno" size="15" title="Solo letras." value="#{pacienteUI.paciente.apellidoP}" required="true" requiredMessage="Apellido paterno faltante"><p:keyFilter regEx="/[A-Z �����]/i" /> </p:inputText>
+                        <p:spacer width="7" /><p:inputText id="apellidoMPaciente" placeholder=" Apellido materno" size="15" title="Solo letras." value="#{pacienteUI.paciente.apellidoM}" required="true" requiredMessage="Apellido materno faltante"><p:keyFilter regEx="/[A-Z �����]/i" /> </p:inputText>
+                        <br/><br/>Género*: <p:selectOneMenu id="generoPaciente" value="#{pacienteUI.paciente.genero}" style="width:260px">
+                            <f:selectItem itemLabel="Selecciona una opción" itemDisabled="true" noSelectionOption="true"/> 
+                            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                            <f:selectItem itemLabel="Femenino" itemValue="Femenino" /></p:selectOneMenu>
+                        <br/><br/>Fecha de nacimiento*: <p:inputText id="fechaNPaciente" type="date" value="#{pacienteUI.fecha}" required="true" requiredMessage="Fecha de nacimiento faltante" />
+                        <br/><br/>Teléfono 1*: <p:inputMask id="telefono1Paciente" placeholder="(999) - 999 - 9999 " mask="(999) - 999 - 9999" maxlength="10" size="12" value ="#{pacienteUI.paciente.telefono}" required="true" requiredMessage="Tel�fono 1 faltante" /><p:spacer height="0" width="80" />Teléfono 2*: <p:inputMask id="telofono2Paciente" placeholder="(999) - 999 - 9999 "  mask="(999) - 999 - 9999" maxlength="10" size="12" value="#{pacienteUI.paciente.telefono2}" required="true" requiredMessage="Tel�fono 2 faltante" />
+                        <br/><br/>Dirección: <p:inputText id="direccionPaciente" placeholder=" Calle, Número" size="50" value="#{pacienteUI.paciente.domicilio}" />
+                        <br/><br/>Correo electrónico*: <p:inputText id="correoPaciente" placeholder=" Correo electrónico" maxlength="40" size="42" value="#{pacienteUI.paciente.correo}" required="true" requiredMessage="Correo faltante" > <p:keyFilter mask="email"/> </p:inputText>
+                        <br/><br/>Tipo de paciente*: <p:selectOneMenu id="tipoPaciente" value="#{pacienteUI.paciente.tipo}" style="width:260px" required="true" requiredMessage="Tipo de paciente faltante">
+                            <f:selectItem itemLabel="Selecciona una opción" itemDisabled="true" noSelectionOption="true" />       
+                            <f:selectItem itemLabel="General" itemValue="General" />
+                            <f:selectItem itemLabel="Ortodoncia" itemValue="Ortodoncia" /></p:selectOneMenu><br></br>
+                        <br></br> Aseguranza: <p:spacer width="0"/> <p:selectOneRadio id="console" value="#{pacienteUI.paciente.aseguranza}" required="true" requiredMessage="Aseguranza faltante" unselectable="true">
+                            <f:selectItem itemLabel="Si" itemValue="true" >  </f:selectItem>
+                            <f:selectItem itemLabel="No" itemValue="false" >  </f:selectItem>
+                            <f:ajax execute="@form" render="@form"/>
+                        </p:selectOneRadio>
+                        <br></br> <p:outputLabel for="numero" value="No.Aseguranza:"  rendered="#{pacienteUI.paciente.aseguranza}" /> <p:inputText id="numero"  rendered="#{pacienteUI.paciente.aseguranza}" required="true" requiredMessage="No.Aseguranza faltante" type="text" value ="#{pacienteUI.paciente.numeroDeSeguro}"><p:keyFilter mask="pint"/>  </p:inputText> <br></br>
+                        <br></br>
+                        <p:commandButton value="Cancelar"  type="reset" action="#{pacienteUI.reset()}" update="registroPac" process="@this" >  </p:commandButton>
+                        <p:commandButton value="Registrar" id="btn_guardar" type="submit" actionListener="#{pacienteUI.registro()}" action="#{pacienteUI.actu()}"  update="growl"> </p:commandButton>
+                    </h:form>
+                </div>
+            </div>
+            <div id="pagCP">
+                <div class="titulos">
+                    <div class="icono"><div class="botones">
+                            <input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRP()"/>
+                            <input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMP()"/>
+                            <input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEP()"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="conPacientes" >
+
+                    <h:form>
+                        <!--<p:commandButton value="Actualizar" update="ptabla" />-->
+                        <br/><b><h1>Consulta de Pacientes</h1></b><h4>Si desea una consulta específica ingrese el nombre de un paciente.</h4>
+                        <hr/><br/>
+
+                        <p:commandButton value="Actualizar" actionListener="#{pacienteUI.actu()}" update="consultaPaciente" action="#{pacienteUI.actualizaMessage()}"/>
+                        <p:dataTable id="consultaPaciente" var="Paciente" emptyMessage="No se encontró" value="#{pacienteUI.pac2}" widgetVar="ptabla"  filteredValue="#{pacienteUI.filtro}">
+                            <p:column  headerText="Nombre" filterBy="#{Paciente.nombre}" filterMatchMode="contains" >
+                                <h:outputText value="#{Paciente.nombre}"  />
+                            </p:column>
+                            <p:column headerText="Nacimiento">
+                                <h:outputText value="#{Paciente.fechaDeNacimiento}" />
+                            </p:column>
+                            <p:column headerText="Teléfono">
+                                <h:outputText value="#{Paciente.telefono}" />
+                            </p:column>
+                            <p:column headerText="Dirección">
+                                <h:outputText value="#{Paciente.domicilio}" />
+                            </p:column>
+                            <p:column headerText="Tipo" sortBy="#{Paciente.tipo}">
+                                <h:outputText value="#{Paciente.tipo}" />
+                            </p:column>
+                            <p:column headerText="Aseguranza">
+                                <h:outputText value="#{Paciente.numeroDeSeguro}" />
+                            </p:column>
+                        </p:dataTable>
+                        <br/><hr/><br/>
+                    </h:form>
+                </div>
+            </div>
+            <div id="pagMP">
+                <div class="titulos">
+                    <div class="icono"><div class="botones">
+                            <input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRP()"/>
+                            <input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCP()"/>
+                            <input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEP()"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modPacientes" >
+                    <div id="modificacionP">
+                        <br/><b><h1>Modificación de Pacientes</h1></b><h4>Ingrese el nombre de un paciente y modifique los datos que desee.</h4>
+                        <hr/><br/>
+                        <h:form >
+                            <p:growl id="msgs" showDetail="true"/>
+                            <p:commandButton value="Actualizar" actionListener="#{pacienteUI.actu()}" update="TablaModificacion" action="#{pacienteUI.actualizaMessage()}"/>
+                            <p:dataTable id="TablaModificacion" emptyMessage="No se encontr�" var="Paciente" value="#{pacienteUI.pac2}" editable="true" >
+                                <p:ajax event="rowEdit" listener="#{pacienteUI.modificar(Paciente)}" update="TablaModificacion" />
+                                <p:ajax event="rowEditCancel" listener="#{pacienteUI.onRowCancel}" update=":form:msgs" />
+
+                                <p:column headerText="Nombre" filterBy="#{Paciente.nombre}" filterMatchMode="contains">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.nombre}" /></f:facet>
+                                        <f:facet name="input"><p:inputText id="modelInput" value="#{Paciente.nombre}" required="true" requiredMessage="Nombre Faltante" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Apellido paterno">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.apellidoP}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{Paciente.apellidoP}" style="width:100%" required="true" requiredMessage="Apellido paterno faltante" label="Apellido Paterno"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Apellido materno">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.apellidoM}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{Paciente.apellidoM}" style="width:100%" required="true" requiredMessage="Apellido materno faltante" label="Apellido Materno"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Tipo">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.tipo}" /></f:facet>
+                                        <f:facet name="input">
+                                            <p:selectOneMenu id="console" value="#{Paciente.tipo}" style="width:125px">
+                                                <f:selectItem itemLabel="General" itemValue="General" />
+                                                <f:selectItem itemLabel="Ortodoncia" itemValue="Ortodoncia" />
+                                            </p:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Teléfono">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.telefono}" style="width: 100%"/></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{Paciente.telefono}" style="width:100%" required="true" requiredMessage="Teléfono faltante"  label="Telefono"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Dirección">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.domicilio}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{Paciente.domicilio}" style="width:100%" required="true" requiredMessage="Dirección faltante" label="Domicilio"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Número de seguro">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{Paciente.numeroDeSeguro}" /></f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText  type="text" value ="#{Paciente.numeroDeSeguro}" required="true" requiredMessage="Número de seguro faltante"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column> 
+
+                                <p:column style="width:35px">
+                                    <p:rowEditor />
+                                </p:column>
+
+                            </p:dataTable> 
+                        </h:form>
+                        <br/><hr/><br/>
+                    </div>
+                </div>
+            </div>
+            <div id="pagEP">
+                <div class="titulos">
+                    <div class="icono">
+                        <div class="botones">
+                            <input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRP()"/>
+                            <input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCP()"/>
+                            <input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMP()"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="eliPacientes" >
+                    <br/><b><h1>Eliminación de Pacientes</h1></b><h4>Ingrese el nombre de un paciente y elimine el registro que desee.</h4>
+                    <hr/><br/>   
+                    <h:form id="form">
+                        <p:growl id="msgs" showDetail="true" />
+                        <p:commandButton id="botAct" value="Actualizar" actionListener="#{pacienteUI.actu()}" update="basicDT" action="#{pacienteUI.actualizaMessage()}"/>
+                        <p:dataTable id="basicDT" emptyMessage="No se encontró" var="Paciente" value="#{pacienteUI.pac2}" >
+
+                            <p:column headerText="Nombre" filterBy="#{Paciente.nombre}" filterMatchMode="contains">
+                                <h:outputText value="#{Paciente.nombre}"  />
+                            </p:column>
+
+                            <p:column headerText="Teléfono">
+                                <h:outputText value="#{Paciente.telefono}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{Paciente.tipo}" />
+                            </p:column>
+
+                            <p:column style="width:32px;text-align: center">
+                                <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="resources/imagenes/eliminar.png " title="View">
+                                    <f:setPropertyActionListener value="#{Paciente}" target="#{pacienteUI.pacienteSelect}" />
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:dialog header="¿Seguro de Eliminar?" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
+                            <p:outputPanel id="carDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty pacienteUI.pacienteSelect}" columnClasses="label,value">
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{pacienteUI.pacienteSelect.nombre}" />
+                                    <h:outputText value="Tel�fono:" />
+                                    <h:outputText value="#{pacienteUI.pacienteSelect.telefono}" />
+                                    <h:outputText value="Tipo" />
+                                    <h:outputText value="#{pacienteUI.pacienteSelect.tipo}" />
+                                </p:panelGrid>
+                                <p:commandButton value="Eliminar" actionListener="#{pacienteUI.eliminar()}" update="basicDT" onclick="PF('carDialog').hide()" action="botAct"/>
+                            </p:outputPanel>
+                        </p:dialog> 
+                    </h:form>
+                    <br/><hr/><br/>
+                </div>
+            </div>
+            <!-- .............................. I N S T R U M E N T A L ............................. -->
+            <div id="pagRI"> <!--  Registro de Instrumental -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCI()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMI()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEI()"/></div></div>
+                </div>
+                <div class="regInstrumental" >
+                    <br/><b><h1>Registro de Instrumental</h1></b><h4>Los datos obligatorios (*)</h4>
+                    <hr/><br/> 
+                    <h:form>
+                        <p:growl id="growl" sticky="false" severity="error,info"> <p:autoUpdate/></p:growl>
+                        <br/>Tipo del producto*: <p:selectOneMenu id="tipo_Instrumental" style="width:260px" value="#{instrumentosDUI.instrumentoDental.tipo}" required="true"  requiredMessage="Tipo de instrumental faltante">
+                            <f:selectItem itemLabel="Selecciona una opción" itemDisabled="true" noSelectionOption="true"/> 
+                            <f:selectItem itemLabel="Instrumental" itemValue="Instrumental"/>	
+                            <f:selectItem itemLabel="Material" itemValue="Material"/>
+                            <f:selectItem itemLabel="Desechable" itemValue="Desechable"/>
+                        </p:selectOneMenu>
+                        <br/><br/>Nombre del producto*: <p:inputText  id="nombre_Instrumental" placeholder=" Nombre" size="18" value="#{instrumentosDUI.instrumentoDental.producto}" required="true" requiredMessage="Nombre faltante"/>
+                        <br/><br/>Cantidad*: <p:inputText  id="cantidad_Instrumental" placeholder=" Cantidad" size="9" value="#{instrumentosDUI.instrumentoDental.cantidad}" required="true" requiredMessage="Cantidad faltante"> <p:keyFilter mask="pint"/> </p:inputText>
+                        <br/><br/>Descripción*: <p:inputText  id="descripcion_Instrumental" placeholder=" Descripción del producto" size="49" value="#{instrumentosDUI.instrumentoDental.descripcion}"/>
+
+                        <br/><br/><br/><hr/>
+                        <p:commandButton class="botonesAbajo" value="Cancelar" type="reset"  id="CancelarRegistroInst"/><p:commandButton value="Registrar" id="RegistrarInst" actionListener="#{instrumentosDUI.registro()}"  action="#{instrumentosDUI.saveMessage()}" />
+                    </h:form>
+                </div>
+            </div>
+            <div id="pagCI"> <!--  Consulta de Instrumental -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRI()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMI()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEI()"/></div></div>
+                </div>
+                <div class="conInstrumental" >
+                    <br/><b><h1>Consulta de Instrumental</h1></b><h4>Si desea una consulta específica ingrese el tipo de instrumental.</h4>
+                    <hr/><br/> 
+                    <h:form>
+                        <p:commandButton value="Actualizar" actionListener="#{instrumentosDUI.actu()}" update="CInstrumento" action="#{pacienteUI.actualizaMessage}"/>
+                        <p:dataTable id="CInstrumento" var="Instrumento" emptyMessage="No se encontro" value="#{instrumentosDUI.cities2}" widgetVar="Table"  filteredValue="#{instrumentosDUI.cities}">
+                            <p:column  headerText="Producto">
+                                <h:outputText value="#{Instrumento.producto}" />
+                            </p:column>
+
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{Instrumento.cantidad}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo" sortBy="">
+                                <h:outputText value="#{Instrumento.tipo}" />
+                            </p:column>
+
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{Instrumento.descripcion}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+
+            <div id="pagMI"> <!--  Modificación de Instrumental -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRI()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCI()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEI()"/></div></div>
+                </div>
+                <div class="modInstrumental" >
+                    <br/><b><h1>Modificación de Instrumental</h1></b><h4>Ingrese el nombre del instrumental y modifique los datos que desee.</h4>
+                    <hr/><br/>
+                    <h:form>
+                        <p:growl id="msg" showDetail="true"/>
+                        <p:commandButton value="Actualizar" update="MInstrumento" action="#{pacienteUI.actualizaMessage}"/>
+                        <p:dataTable id="MInstrumento" var="InstrumentosD" value="#{instrumentosDUI.cities2}" editable="true" >
+
+                            <p:ajax event="rowEdit" update="MInstrumento" listener="#{instrumentosDUI.modificar(InstrumentosD)}" />
+                            <p:ajax event="rowEditCancel" update=":form:msgs" />
+
+                            <p:column headerText="Nombre">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{InstrumentosD.producto}" /></f:facet>
+                                    <f:facet name="input"><p:inputText id="modelInput" value="#{InstrumentosD.producto}" required="true" requiredMessage="Producto faltante" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Cantidad">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{InstrumentosD.cantidad}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{InstrumentosD.cantidad}" style="width:100%" required="true" requiredMessage="Cantidad faltante" label="Cantidad"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Descripción">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{InstrumentosD.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{InstrumentosD.descripcion}" style="width:100%" label="Descripcion"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Tipo">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{InstrumentosD.tipo}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu id="console" value="#{InstrumentosD.tipo}" style="width:125px">
+                                            <f:selectItem itemLabel="Instrumental" itemValue="Instrumental"/>	
+                                            <f:selectItem itemLabel="Material" itemValue="Material"/>
+                                            <f:selectItem itemLabel="Desechable" itemValue="Desechable"/>
+
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column style="width:35px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable> 
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+
+            <div id="pagEI"> <!--  Eliminación de Instrumental -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRI()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCI()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMI()"/></div></div>   
+                </div>
+                <div class="eliInstrumental" >
+                    <br/><b><h1>Eliminación de Instrumental</h1></b><h4>Ingrese el nombre del instrumental y elimine el registro que desee.</h4>
+                    <hr/><br/>
+                    <h:form id="formINS">
+                        <p:growl id="msgs" showDetail="true" />
+                        <p:commandButton value="Actualizar" update="instrumentoDT" action="#{pacienteUI.actualizaMessage}"/>
+                        <p:dataTable id="instrumentoDT" var="instrumentos" value="#{instrumentosDUI.cities2}" >
+
+                            <p:column headerText="Producto" >
+                                <h:outputText value="#{instrumentos.producto}"  />
+                            </p:column>
+
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{instrumentos.cantidad}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{instrumentos.tipo}" />
+                            </p:column>
+
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{instrumentos.descripcion}" />
+                            </p:column>
+
+                            <p:column style="width:32px;text-align: center">
+                                <p:commandButton update=":formINS:carDet" oncomplete="PF('insDialog').show()" icon="resources/imagenes/elimitarget=" title="View">
+                                    <f:setPropertyActionListener value="#{instrumentos}" target="#{instrumentosDUI.instrumentoSelect}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:dialog header="Esta Seguro de Eliminar?" widgetVar="insDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:outputPanel id="carDet" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty instrumentosDUI.instrumentoSelect}" columnClasses="label,value">
+                                    <h:outputText value="Producto:" />
+                                    <h:outputText value="#{instrumentosDUI.instrumentoSelect.producto}" />
+
+                                    <h:outputText value="Cantidad:" />
+                                    <h:outputText value="#{instrumentosDUI.instrumentoSelect.cantidad}" />
+
+                                    <h:outputText value="Tipo" />
+                                    <h:outputText value="#{instrumentosDUI.instrumentoSelect.tipo}" />
+
+                                    <h:outputText value="Descripcion" />
+                                    <h:outputText value="#{instrumentosDUI.instrumentoSelect.descripcion}" />
+                                </p:panelGrid>
+                                <p:commandButton value="Eliminar" actionListener="#{instrumentosDUI.eliminar()}" update="instrumentoDT" onclick="PF('insDialog').hide()" action="botAct" />
+
+                            </p:outputPanel>
+                        </p:dialog> 
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+            <!-- .............................. P R O .  D E N T A L E S ............................ -->
+            <div id="pagRPD"> <!--  Registro de Procedimientos Dentales -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="regProDentales" >
+                    <br/><b><h1>Registro de Procedimientos Dentales</h1></b><h4>Los datos obligatorios (*)</h4>
+                    <hr/><br/> 
+                    <h:form>
+                        <p:growl id="growl" sticky="false" severity="error,info"> <p:autoUpdate/></p:growl>
+                        <br/>Nombre del procedimiento*: <p:inputText  id="nombreProcedimiento" placeholder=" Nombre" size="18" value="" required="true" requiredMessage="Nombre faltante"/>
+                        <br/><br/>Tipo*: <p:selectOneMenu id="tipoProcedimiento" style="width:260px" value="" required="true"  requiredMessage="Tipo de procedimiento faltante">
+                            <f:selectItem itemLabel="Selecciona una opción" itemDisabled="true" noSelectionOption="true"/> 
+                            <f:selectItem itemLabel="Ortodoncia" itemValue="Instrumental"/>	
+                            <f:selectItem itemLabel="General" itemValue="Material"/>
+                        </p:selectOneMenu>
+                        <br/><br/>Costo*: <p:inputText  id="cantidad_Instrumental" placeholder=" Cantidad" size="9" value="#{instrumentosDUI.instrumentoDental.cantidad}" required="true" requiredMessage="Cantidad faltante"> <p:keyFilter mask="pint"/> </p:inputText>
+                        <br/><br/>Instrumentos utilizados*:
+                        <br/><br/><hr/>
+                        <p:commandButton class="botonesAbajo" value="Cancelar" type="reset"  id="CancelarRegistroInst"/><p:commandButton value="Registrar" id="RegistrarInst" actionListener="#{instrumentosDUI.registro()}"  action="#{instrumentosDUI.saveMessage()}" />
+                    </h:form>
+
+                </div>
+            </div>
+            <div id="pagCPD"> <!--  Consulta de Procedimientos Dentales -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="conProDentales" >
+                    <br/><b><h1>Consulta de Procedimientos Dentales</h1></b><h4>Si desea una consulta espec�fica ingrese el nombre de procedimiento dental.</h4>
+                    <hr/><br/> 
+                    <h:form>
+                        <p:commandButton value="Actualizar" update="consultaProcedimientos" />
+                        <p:dataTable id="consultaProcedimientos" var="Paciente" emptyMessage="No se encontró" value="" widgetVar="ptabla"  filteredValue="">
+                            <p:column  headerText="Nombre" filterBy="" filterMatchMode="contains" >
+                                <h:outputText value=""  />
+                            </p:column>
+                            <p:column headerText="Tipo">
+                                <h:outputText value="" />
+                            </p:column>
+                            <p:column headerText="Costo">
+                                <h:outputText value="" />
+                            </p:column>
+                            <p:column headerText="Instrumentos Dentales">
+                                <h:outputText value="" />
+                            </p:column>
+                        </p:dataTable>            
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+            <div id="pagMPD"> <!--  Modificaci�n de Procedimientos Dentales -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="modProDentales" >
+                    <br/><b><h1>Modificaci�n de Procedimientos Dentales</h1></b><h4>Ingrese el nombre del procedimiento dental y modifique los datos que desee.</h4>
+                    <hr/><br/>
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+
+            <div id="pagEPD"> <!--  Eliminaci�n de Procedimientos Dentales -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/></div></div>   
+                </div>
+                <div class="eliProDentales" >
+                    <br/><b><h1>Eliminaci�n de Procedimientos Dentales</h1></b><h4>Ingrese el nombre del procedimiento dental y elimine el registro que desee.</h4>
+                    <hr/><br/>
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div> 
+            <!-- .................................... C I T A S ..................................... -->
+            <div id="pagRC"> <!--  Registro de Citas -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="regCitas" >
+                    <br/><b><h1>Registro de Citas</h1></b><h4>Los datos obligatorios (*)</h4>
+                    <hr/><br/> 
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+            <div id="pagCC"> <!--  Consulta de Citas -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="conCitas" >
+                    <br/><b><h1>Consulta de Citas</h1></b><h4>Si desea una consulta espec�fica ingrese una fecha.</h4>
+                    <hr/><br/> 
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+            <div id="pagMC"> <!--  Modificaci�n de Citas -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonEliminar" value="Eliminar" onclick="mostrarPagEPD()"/></div></div>
+                </div>
+                <div class="modCitas" >
+                    <br/><b><h1>Modificaci�n de Citas</h1></b><h4>Ingrese el nombre del paciente y modifique los datos que desee.</h4>
+                    <hr/><br/>
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div>
+
+            <div id="pagEC"> <!--  Eliminaci�n de Citas -->
+                <div class="titulo">
+                    <div class="icono"><div class="botones"><input type="button" class="botonRegistrar" value="Registrar" onclick="mostrarPagRPD()"/><input type="button" class="botonConsultar" value="Consultar" onclick="mostrarPagCPD()"/><input type="button" class="botonModificar" value="Modificar" onclick="mostrarPagMPD()"/></div></div>   
+                </div>
+                <div class="eliCitas" >
+                    <br/><b><h1>Eliminaci�n de Citas</h1></b><h4>Ingrese el nombre del paciente y elimine el registro que desee.</h4>
+                    <hr/><br/>
+                    <h:form>
+
+                    </h:form>
+                    <br/><br/><hr/>
+                </div>
+            </div> 
+            <!-- ............................ P A G O S  G E N E R A L E S .......................... -->
+            <!-- ........................... P A G O S  O R T O D O N C I A ......................... -->
+        </div> <!-- Cierrra el main -->
+
+
+    </h:body>
+</html>
